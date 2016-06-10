@@ -16,3 +16,19 @@ body {
         height: auto;
     }
 }
+
+#bottom{
+  width: 200px;
+  height: 200px;
+}
+
+#rainAnimation{
+  display: none;
+  position: fixed;
+  height:100vh;
+}
+
+
+#parent{
+
+}
