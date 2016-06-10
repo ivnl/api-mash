@@ -33,21 +33,17 @@ function initialize() {
         infowindow.close();
     });
 
-    //broken click functionality for map
-    // google.maps.event.addListener(map, 'click', function(event) {
-    //     placeMarker(event.latLng);
-    // });
-
-    seekAddress();
-}
-
-function placeMarker(location) {
-
-    marker.setPosition(location);
-    map.setCenter(location);
     seekAddress();
 
-
+    //DISABLE ENTER KEY FROM REFRESHING
+    $('#search').on('keyup keypress', function(e) {
+        var keyCode = e.keyCode || e.which;
+        if (keyCode === 13 && document.getElementById('address').value != '') {
+            e.preventDefault();
+            seekAddress();
+            return false;
+        }
+    });
 }
 
 function seekAddress() { //prevent default behavior of submit or find alternative, change submit to listener
@@ -99,7 +95,6 @@ function geocodePosition(pos) {
         var town = split[1]; ///
         var state = split[2].split(" ")[1]; ///
         var longlat = marker.getPosition().toUrlValue(2);
-        //console.log(town + " " + state);
 
         if (responses && responses.length > 0) {
             marker.formatted_address = responses[0].formatted_address;
@@ -123,14 +118,9 @@ function seekInfo(state, town, longlat) {
         function(data) {
             console.log(data);
             var div = document.getElementById('right');
-            div.innerHTML = div.innerHTML + "<br/> The temp in " + town + " is: " + data.query.results.channel.item.condition.temp + " " +
-                data.query.results.channel.units.temperature + " the time is: " + data.query.results.channel.item.pubDate;
+            div.innerHTML = div.innerHTML + "The temp in " + town + " is: " + data.query.results.channel.item.condition.temp + " " +
+                data.query.results.channel.units.temperature + " the time is: " + data.query.results.channel.item.pubDate + "<br/>";
 
-            // alert("The temperatute in " + town + " is " +
-            //     data.query.results.channel.item.condition.temp +
-            //     data.query.results.channel.units.temperature +
-            //     " the time is: " + data.query.results.channel.item.pubDate
-            // );
         });
 
     //get nearby places from wikipedia geonames api based on lat and long
@@ -138,7 +128,7 @@ function seekInfo(state, town, longlat) {
         function(response) {
             console.log(response);
             var div = document.getElementById('left');
-            div.innerHTML = div.innerHTML + "<br/><br/>" + response.geonames[0].summary;
+            div.innerHTML = div.innerHTML + response.geonames[0].summary + "<br/><br/>";
 
         });
 

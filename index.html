@@ -6,6 +6,7 @@
     <title>infoMap</title>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="style/font-awesome.css">
     <script src="https://maps.googleapis.com/maps/api/js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="script/script.js"></script>
@@ -16,23 +17,27 @@
     <header>
         <div id="nav">
         </div>
-        <h1 style>INFO MAP</h1>
+        <h1 style="font-size: 48px">API MAP</h1>
     </header>
     <main>
-        <form>
-            <div id="search">
-                <input id="address" type="text" value="United States">
-                <input type="submit" value="Search" onsubmit="seekAddress()">
+        <form id="search">
+            <div>
+                <input id="address" type="text" value="United States" required>
+                <input type="button" value="Search" onclick="seekAddress()">
             </div>
         </form>
         <div id="wrapper">
             <div id="left">
-                <h1>POI</h1>
+                <h1 style="margin-top:-20px">INFO</h1>
+                <hr>
             </div>
-            <div id="map_canvas">
+            <div id="inner-wrap">
+                <div id="map_canvas">
+                </div>
             </div>
             <div id="right">
-                <h1>WEATHER</h1>
+                <h1 style="margin-top:-20px">WEATHER</h1>
+                <hr>
             </div>
         </div>
     </main>
