@@ -6,6 +6,8 @@ var town;
 var lat;
 var lng;
 
+
+
 /*The tool tip windows that shows above the marker with the location information*/
 var infowindow = new google.maps.InfoWindow({
   size: new google.maps.Size(200, 200)
@@ -123,11 +125,9 @@ function seekInfo(state, town, longlat) {
                 console.log("Rain status: " + rainStatus);
                 if(rainStatus == "Mostly Sunny" || rainStatus == "Sunny" || rainStatus == "Cloudy" || rainStatus == "Mostly Cloudy"){
 
-                  $("#rainAnimation").css("display","block");
-
-
-
-
+                document.getElementById("rainAnimation").className = "weather rain";;
+                $(".weather rain").css("background-color","#ffffff");
+                $(".weather rain").css("opacity","0.3");
 
                 }
 
