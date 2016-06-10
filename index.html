@@ -7,6 +7,7 @@
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="style/style.css">
     <link rel="stylesheet" href="style/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moqmar/weather.css/master/weather.min.css">
     <script src="https://maps.googleapis.com/maps/api/js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="script/script.js"></script>
@@ -19,28 +20,30 @@
         </div>
         <h1 style="font-size: 48px">API MAP</h1>
     </header>
-    <main>
-        <form id="search">
-            <div>
-                <input id="address" type="text" value="United States" required>
-                <input type="button" value="Search" onclick="seekAddress()">
-            </div>
-        </form>
-        <div id="wrapper">
-            <div id="left">
-                <h1 style="margin-top:-20px">INFO</h1>
-                <hr>
-            </div>
-            <div id="inner-wrap">
-                <div id="map_canvas">
+    <div id="rainAnimation">
+        <main>
+            <form id="search">
+                <div>
+                    <input id="address" type="text" value="United States" required>
+                    <input type="button" value="Search" onclick="seekAddress()">
+                </div>
+            </form>
+            <div id="wrapper">
+                <div id="left">
+                    <h1 style="margin-top:-20px">INFO</h1>
+                    <hr>
+                </div>
+                <div id="inner-wrap">
+                    <div id="map_canvas">
+                    </div>
+                </div>
+                <div id="right">
+                    <h1 style="margin-top:-20px">WEATHER</h1>
+                    <hr>
                 </div>
             </div>
-            <div id="right">
-                <h1 style="margin-top:-20px">WEATHER</h1>
-                <hr>
-            </div>
-        </div>
-    </main>
+        </main>
+    </div>
     <footer>
         <div id="bottom">
             <div id="things">

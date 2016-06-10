@@ -6,11 +6,15 @@ var town;
 var lat;
 var lng;
 
+
+
+
+/*The tool tip windows that shows above the marker with the location information*/
 var infowindow = new google.maps.InfoWindow({
-    //what is this size?
     size: new google.maps.Size(200, 200)
 });
 
+/*initialize function initializes the map and sets the location to United States*/
 function initialize() {
     geocoder = new google.maps.Geocoder();
     var unitedstates = new google.maps.LatLng(37.09024, -95.7128);
@@ -35,6 +39,7 @@ function initialize() {
 
     seekAddress();
 
+
     //DISABLE ENTER KEY FROM REFRESHING
     $('#search').on('keyup keypress', function(e) {
         var keyCode = e.keyCode || e.which;
@@ -44,9 +49,11 @@ function initialize() {
             return false;
         }
     });
-}
 
-function seekAddress() { //prevent default behavior of submit or find alternative, change submit to listener
+}
+//prevent default behavior of submit or find alternative, change submit to listener
+//seekAddress function puts the marker at the location which was set in the initialize function above
+function seekAddress() {
     var address = document.getElementById('address').value;
     geocoder.geocode({
         'address': address
@@ -84,6 +91,10 @@ function seekAddress() { //prevent default behavior of submit or find alternativ
     return false;
 }
 
+/*geocodePosition function gets the adress of the marker
+then splits it into its components and also shows the address
+in the tool tip info window on top of the marker
+*/
 function geocodePosition(pos) {
     geocoder.geocode({
         latLng: pos
@@ -107,6 +118,8 @@ function geocodePosition(pos) {
     });
 }
 
+/*seekInfo function uses the location obtained from the previous functions and
+calls two api's to find the weather and interseting places around that location*/
 function seekInfo(state, town, longlat) {
 
     var lat = longlat.split(",")[0];
@@ -121,6 +134,16 @@ function seekInfo(state, town, longlat) {
             div.innerHTML = div.innerHTML + "The temp in " + town + " is: " + data.query.results.channel.item.condition.temp + " " +
                 data.query.results.channel.units.temperature + " the time is: " + data.query.results.channel.item.pubDate + "<br/>";
 
+            var rainStatus = data.query.results.channel.item.condition.text;
+            console.log("Rain status: " + rainStatus);
+            if (rainStatus == "Mostly Sunny" || rainStatus == "Sunny" || rainStatus == "Cloudy" || rainStatus == "Mostly Cloudy") {
+
+                document.getElementById("rainAnimation").className = "weather rain";
+                $(".weather rain").css("background-color", "#ffffff");
+                $(".weather rain").css("opacity", "0.3");
+
+            }
+
         });
 
     //get nearby places from wikipedia geonames api based on lat and long
@@ -131,8 +154,6 @@ function seekInfo(state, town, longlat) {
             div.innerHTML = div.innerHTML + response.geonames[0].summary + "<br/><br/>";
 
         });
-
-
 }
 
 google.maps.event.addDomListener(window, "load", initialize);
