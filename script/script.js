@@ -6,8 +6,6 @@ var town;
 var lat;
 var lng;
 
-
-
 var infowindow = new google.maps.InfoWindow({
     //what is this size?
     size: new google.maps.Size(200, 200)
@@ -27,7 +25,6 @@ function initialize() {
             position: google.maps.ControlPosition.TOP_CENTER,
         },
         streetViewControl: false,
-
     };
 
     map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
@@ -72,6 +69,7 @@ function seekAddress() { //prevent default behavior of submit or find alternativ
             });
             google.maps.event.addListener(marker, 'dragend', function() {
                 geocodePosition(marker.getPosition());
+                map.setCenter(marker.getPosition());
             });
             google.maps.event.addListener(marker, 'click', function() {
                 if (marker.formatted_address) {
