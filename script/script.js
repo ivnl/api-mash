@@ -6,7 +6,6 @@ var town;
 var lat;
 var lng;
 
-
 /*The tool tip windows that shows above the marker with the location information*/
 var infowindow = new google.maps.InfoWindow({
   size: new google.maps.Size(200, 200)
@@ -115,10 +114,13 @@ function seekInfo(state, town, longlat) {
     $.get('https://query.yahooapis.com/v1/public/yql?q=select * from weather.forecast ' +
         'where woeid in (select woeid from geo.places(1) where text=' + "\"" + town + ", " + state + "\"" + ")&format=json",
         function(data) {
+          console.log("WeatherData: ");
             console.log(data);
             var div = document.getElementById('right');
             div.innerHTML = div.innerHTML + "<br/> The temp in " + town + " is: " + data.query.results.channel.item.condition.temp + " " +
                 data.query.results.channel.units.temperature + " the time is: " + data.query.results.channel.item.pubDate;
+                var rainStatus =   data.query.results.channel.item.condition.text;
+                console.log("Rain status: " + rainStatus);
         });
 
     //get nearby places from wikipedia geonames api based on lat and long
