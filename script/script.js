@@ -7,12 +7,12 @@ var lat;
 var lng;
 
 
-
+/*The tool tip windows that shows above the marker with the location information*/
 var infowindow = new google.maps.InfoWindow({
-    //what is this size?
-    size: new google.maps.Size(200, 200)
+  size: new google.maps.Size(200, 200)
 });
 
+/*initialize function initializes the map and sets the location to United States*/
 function initialize() {
     geocoder = new google.maps.Geocoder();
     var unitedstates = new google.maps.LatLng(37.09024, -95.7128);
@@ -38,18 +38,10 @@ function initialize() {
     seekAddress();
 }
 
-function placeMarker(location) {
 
-    marker.setPosition(location);
-    map.setCenter(location);
-    seekAddress();
-
-
-}
-
-
-
-function seekAddress() { //prevent default behavior of submit or find alternative, change submit to listener
+//prevent default behavior of submit or find alternative, change submit to listener
+//seekAddress function puts the marker at the location which was set in the initialize function above
+function seekAddress() {
     var address = document.getElementById('address').value;
     geocoder.geocode({
         'address': address
@@ -86,12 +78,10 @@ function seekAddress() { //prevent default behavior of submit or find alternativ
     return false;
 }
 
-
-
-
-
-
-
+/*geocodePosition function gets the adress of the marker
+then splits it into its components and also shows the address
+in the tool tip info window on top of the marker
+*/
 function geocodePosition(pos) {
     geocoder.geocode({
         latLng: pos
@@ -114,6 +104,8 @@ function geocodePosition(pos) {
     });
 }
 
+/*seekInfo function uses the location obtained from the previous functions and
+calls two api's to find the weather and interseting places around that location*/
 function seekInfo(state, town, longlat) {
 
     var lat = longlat.split(",")[0];
