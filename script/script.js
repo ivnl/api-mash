@@ -27,7 +27,6 @@ function initialize() {
             position: google.maps.ControlPosition.TOP_CENTER,
         },
         streetViewControl: false,
-
     };
 
     map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
@@ -35,11 +34,6 @@ function initialize() {
     google.maps.event.addListener(map, 'click', function() {
         infowindow.close();
     });
-
-    //broken click functionality for map
-    // google.maps.event.addListener(map, 'click', function(event) {
-    //     placeMarker(event.latLng);
-    // });
 
     seekAddress();
 }
@@ -52,6 +46,8 @@ function placeMarker(location) {
 
 
 }
+
+
 
 function seekAddress() { //prevent default behavior of submit or find alternative, change submit to listener
     var address = document.getElementById('address').value;
@@ -90,6 +86,12 @@ function seekAddress() { //prevent default behavior of submit or find alternativ
     return false;
 }
 
+
+
+
+
+
+
 function geocodePosition(pos) {
     geocoder.geocode({
         latLng: pos
@@ -101,8 +103,6 @@ function geocodePosition(pos) {
         var town = split[1]; ///
         var state = split[2].split(" ")[1]; ///
         var longlat = marker.getPosition().toUrlValue(2);
-        //console.log(town + " " + state);
-
         if (responses && responses.length > 0) {
             marker.formatted_address = responses[0].formatted_address;
             seekInfo(state, town, longlat);
@@ -127,12 +127,6 @@ function seekInfo(state, town, longlat) {
             var div = document.getElementById('right');
             div.innerHTML = div.innerHTML + "<br/> The temp in " + town + " is: " + data.query.results.channel.item.condition.temp + " " +
                 data.query.results.channel.units.temperature + " the time is: " + data.query.results.channel.item.pubDate;
-
-            // alert("The temperatute in " + town + " is " +
-            //     data.query.results.channel.item.condition.temp +
-            //     data.query.results.channel.units.temperature +
-            //     " the time is: " + data.query.results.channel.item.pubDate
-            // );
         });
 
     //get nearby places from wikipedia geonames api based on lat and long
@@ -143,8 +137,6 @@ function seekInfo(state, town, longlat) {
             div.innerHTML = div.innerHTML + "<br/><br/>" + response.geonames[0].summary;
 
         });
-
-
 }
 
 google.maps.event.addDomListener(window, "load", initialize);
