@@ -7,64 +7,51 @@
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="style/style.css">
-<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moqmar/weather.css/master/weather.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moqmar/weather.css/master/weather.min.css">
     <script src="https://maps.googleapis.com/maps/api/js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="script/script.js"></script>
-
     <link rel="icon" type="image/png" href="">
 </head>
 
 <body>
     <header>
-        <h1 style="color: white">Navigation Bar?</h1>
-        <h1 style="color: white">Info Map</h1>
-
+      <div id="nav">
+        </div>
+        <h1>Info Map</h1>
     </header>
 
 
-
-
 <div id = "rainAnimation" >
-    <div  class ="show">
     <main>
         <form>
-            <div>
+            <div id="search">
                 <input id="address" type="text" value="United States">
                 <input type="submit" value="Search" onsubmit="seekAddress()">
             </div>
         </form>
-        <div id="map-wrapper" style="height:500px;margin: auto; padding-top:50px">
-            <div id="left" style="float:left; background-color:pink; width:20%; height:100%">
-                <h1>interesting places</h1>
-                <p>transform to click menu if width becomes too small add news? or other related info</p>
+        <div id="wrapper">
+            <div id="left">
+                <h1>POI</h1>
             </div>
-            <div id="map_canvas" style="float:left; background-color:white;margin: auto;height:100%;width:60%">
+            <div id="map_canvas">
             </div>
-            <div id="right" style="float:left; background-color:lightblue; width:20%; height:100%">
-                <h1>weather</h1>
-                <p>transform to click menu if width becomes too small and add weather info</p>
-                <p>forecast? time? date? sun/rain/snow?</p>
+            <div id="right">
+                <h1>Weather</h1>
             </div>
 
         </div>
-
 
     </main>
 
       </div>
 
-            </div>
     <footer>
-        <div id="bottom" style="color:white">
 
-            <h1> will fix layout and css afterwards..</h1>
+        <div id="bottom">
             <div id="things">
             </div>
-
-            <h1> some other things here..</h1>
         </div>
-
 
     </footer>
 </body>

@@ -8,6 +8,7 @@ var lng;
 
 
 
+
 /*The tool tip windows that shows above the marker with the location information*/
 var infowindow = new google.maps.InfoWindow({
   size: new google.maps.Size(200, 200)
@@ -61,6 +62,7 @@ function seekAddress() {
             });
             google.maps.event.addListener(marker, 'dragend', function() {
                 geocodePosition(marker.getPosition());
+                map.setCenter(marker.getPosition());
             });
             google.maps.event.addListener(marker, 'click', function() {
                 if (marker.formatted_address) {
