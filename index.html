@@ -14,36 +14,34 @@
     <link rel="icon" type="image/png" href="">
 </head>
 
-<body>
+<body id="rainAnimation">
     <header>
         <div id="nav">
         </div>
         <h1 style="font-size: 48px">API MAP</h1>
     </header>
-    <div id="rainAnimation">
-        <main>
-            <form id="search">
-                <div>
-                    <input id="address" type="text" value="United States" required>
-                    <input type="button" value="Search" onclick="seekAddress()">
-                </div>
-            </form>
-            <div id="wrapper">
-                <div id="left">
-                    <h1 style="margin-top:-20px">INFO</h1>
-                    <hr>
-                </div>
-                <div id="inner-wrap">
-                    <div id="map_canvas">
-                    </div>
-                </div>
-                <div id="right">
-                    <h1 style="margin-top:-20px">WEATHER</h1>
-                    <hr>
+    <main>
+        <form id="search">
+            <input id="address" type="text" value="USA" required>
+            <button type="button" onclick="seekAddress()">
+                <i class="fa fa-chevron-circle-right fa-lg"></i>
+            </button>
+        </form>
+        <div id="wrapper">
+            <div id="left">
+                <h1 style="margin-top:-20px"><i class="fa fa-info-circle" aria-hidden="true"></i>  INFO</h1>
+                <hr>
+            </div>
+            <div id="inner-wrap">
+                <div id="map_canvas">
                 </div>
             </div>
-        </main>
-    </div>
+            <div id="right">
+                <h1 style="margin-top:-20px"><i class="fa fa-cloud" aria-hidden="true"></i>  WEATHER</h1>
+                <hr>
+            </div>
+        </div>
+    </main>
     <footer>
         <div id="bottom">
             <div id="things">

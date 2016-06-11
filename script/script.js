@@ -6,13 +6,11 @@ var town;
 var lat;
 var lng;
 
-
-
-
 /*The tool tip windows that shows above the marker with the location information*/
 var infowindow = new google.maps.InfoWindow({
     size: new google.maps.Size(200, 200)
 });
+
 
 /*initialize function initializes the map and sets the location to United States*/
 function initialize() {
@@ -38,7 +36,6 @@ function initialize() {
     });
 
     seekAddress();
-
 
     //DISABLE ENTER KEY FROM REFRESHING
     $('#search').on('keyup keypress', function(e) {
@@ -67,7 +64,7 @@ function seekAddress() {
             marker = new google.maps.Marker({
                 map: map,
                 draggable: true,
-                animation: google.maps.Animation.BOUNCE,
+                animation: google.maps.Animation.DROP,
                 position: results[0].geometry.location
             });
             google.maps.event.addListener(marker, 'dragend', function() {
@@ -83,8 +80,6 @@ function seekAddress() {
                 infowindow.open(map, marker);
             });
             google.maps.event.trigger(marker, 'click');
-        } else {
-            alert('Geocode was not successful for the following reason: ' + status);
         }
     });
 

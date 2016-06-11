@@ -8,55 +8,6 @@ html {
     background-size: cover;
 }
 
-
-body {
-    background-color: rgba(255, 255, 255, .2);
-    color: black;
-    text-align: center;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-}
-
-#search {
-    padding-top: 30px;
-}
-
-#nav {
-    height: 50px;
-    /*    background-color: rgba(0, 0, 0, .2);
-*/
-}
-
-#wrapper {
-    /*    background-color: rgba(0, 0, 0, .2);
-*/
-    height: 500px;
-    margin: auto;
-    padding-top: 40px;
-    padding-bottom: 40px;
-}
-
-#left {
-    float: left;
-    width: 19%;
-    height: 100%;
-}
-
-#map_canvas {
-    border: 2px solid black;
-    float: left;
-    margin: auto;
-    height: 100%;
-    width: 60%
-}
-
-#right {
-    float: left;
-    width: 20%;
-    height: 100%;
-}
-
 body {
     text-shadow: 2px 2px 8px black;
     background-color: rgba(255, 255, 255, .1);
@@ -76,9 +27,43 @@ hr {
     border-width: 1px;
 }
 
+form button {
+    text-shadow: 2px 2px 8px black;
+    background-color: transparent;
+    border: none;
+    font-size: 32px;
+    color: white;
+}
+
+
+/*button {
+    height: 40px;
+    width: 62px;
+    margin-bottom: 5px;
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+
+    font-size: 16px;
+}*/
+
+#address {
+    width: 35%;
+    height: 32px;
+    font-size: 22px;
+    font-weight: 100;
+}
+
+#right {
+    float: left;
+    width: 20%;
+    height: 100%;
+}
+
 #search {
+    height: 100%;
+    font-size: 36px;
     text-align: center;
-    padding-top: 5px;
     padding-bottom: 40px;
 }
 
@@ -111,7 +96,12 @@ hr {
 }
 
 #map_canvas {
-    text-shadow: 0px 0px 0px black;
+    float: left;
+    border-left: solid white;
+    border-right: solid white;
+    float: left;
+    margin: auto;
+    text-shadow: 0 0 0 black;
     color: black;
     height: 100%;
     width: 100%;
@@ -126,6 +116,11 @@ hr {
     height: 100%;
 }
 
+#bottom {
+    width: 200px;
+}
+
+
 /*what is this?
 */
 
@@ -134,9 +129,4 @@ hr {
     body {
         height: auto;
     }
-}
-
-#bottom {
-    width: 200px;
-    height: 200px;
 }
