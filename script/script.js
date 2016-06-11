@@ -6,17 +6,45 @@ var town;
 var lat;
 var lng;
 
-$.fn.redraw = function() {
-    $(this).each(function() {
-        var redraw = this.offsetHeight;
-    });
-};
-
 /*The tool tip windows that shows above the marker with the location information*/
-var infowindow = new google.maps.InfoWindow({
-    size: new google.maps.Size(200, 200)
-});
+var infowindow = new google.maps.InfoWindow();
 
+
+// function to swap the center map div and the left div when user resizes width under 720px
+function trySwap() {
+    if (document.body.clientWidth <= 720) {
+
+        //         #inner-wrap {
+        //     float: none;
+        //     width: 100%;
+        //     height: 50%;
+        // }
+        // #map_canvas {
+        //     float:none;
+        //     height: 100%;
+        //     width: 100%;
+        //     padding-top: 0;
+        //     margin-top: 0;
+        // }
+        $('#inner-wrap').css("float", "none");
+        $('#inner-wrap').css("width", "100%");
+        $('#inner-wrap').css("height", "100%");
+
+
+        $('#left').insertAfter('#inner-wrap');
+        $('#left').css("float", "none");
+        $('#right').css("float", "none");
+
+    } else if (document.body.clientWidth > 720) {
+        $('#left').insertBefore('#inner-wrap');
+        $('#left').css("float", "left");
+        $('#right').css("float", "left");
+
+        $('#inner-wrap').css("float", "");
+        $('#inner-wrap').css("width", "");
+        $('#inner-wrap').css("height", "");
+    }
+}
 
 /*initialize function initializes the map and sets the location to United States*/
 function initialize() {
@@ -45,22 +73,45 @@ function initialize() {
 
     seekAddress();
 
-    //DISABLE ENTER KEY FROM REFRESHING
+    //DISABLE ENTER KEY FROM REFRESHING, BUT THEN ENTER DOES NOT SUBMIT ANYMORE
     $('#search').on('keyup keypress', function(e) {
         var keyCode = e.keyCode || e.which;
         if (keyCode === 13 && document.getElementById('address').value != '') {
             e.preventDefault();
-            seekAddress();
+            //geocodeLatLng();
             return false;
         }
     });
-
-
-
 }
-//prevent default behavior of submit or find alternative, change submit to listener
+
+//reverse geocode using lat long to find nearest address
+function geocodeLatLng() {
+    var latlngStr = marker.getPosition().toUrlValue(6);
+    var latlng = { lat: Number(latlngStr.split(",")[0]), lng: Number(latlngStr.split(",")[1]) };
+    geocoder.geocode({ 'location': latlng }, function(results, status) {
+        if (status === google.maps.GeocoderStatus.OK) {
+            if (results[1]) {
+                var str = results[1].formatted_address; ///
+                var split = str.split(","); ///
+                var town = split[1]; ///
+                var state = split[2].split(" ")[1]; ///
+
+                seekInfo(state, town, latlngStr);
+            } else {
+                console.log("geocodelatlng fail");
+                window.alert('No results found');
+            }
+        } else {
+            console.log("geocodelatlng fail");
+            window.alert('Geocoder failed due to: ' + status);
+        }
+    });
+}
+
+
 //seekAddress function puts the marker at the location which was set in the initialize function above
 function seekAddress() {
+
     var address = document.getElementById('address').value;
     geocoder.geocode({
         'address': address
@@ -80,6 +131,7 @@ function seekAddress() {
             google.maps.event.addListener(marker, 'dragend', function() {
                 geocodePosition(marker.getPosition());
                 map.setCenter(marker.getPosition());
+
             });
             google.maps.event.addListener(marker, 'click', function() {
                 if (marker.formatted_address) {
@@ -90,6 +142,7 @@ function seekAddress() {
                 infowindow.open(map, marker);
             });
             google.maps.event.trigger(marker, 'click');
+            geocodeLatLng();
         }
     });
 
@@ -101,6 +154,7 @@ then splits it into its components and also shows the address
 in the tool tip info window on top of the marker
 */
 function geocodePosition(pos) {
+
     geocoder.geocode({
         latLng: pos
     }, function(responses) {
@@ -126,13 +180,13 @@ function geocodePosition(pos) {
 /*seekInfo function uses the location obtained from the previous functions and
 calls two api's to find the weather and interseting places around that location*/
 function seekInfo(state, town, longlat) {
-
     var lat = longlat.split(",")[0];
     var long = longlat.split(",")[1];
 
     //get weather from yahoo based on town and state --- could potentially switch to lat and long as well*
     $.get('https://query.yahooapis.com/v1/public/yql?q=select * from weather.forecast ' +
         'where woeid in (select woeid from geo.places(1) where text=' + "\"" + town + ", " + state + "\"" + ")&format=json",
+        // WHERE text="{$seedLat}, {$seedLong}" 
         function(data) {
             console.log(data);
             var div = document.getElementById('right');
@@ -144,12 +198,19 @@ function seekInfo(state, town, longlat) {
             if (rainStatus == "Mostly Sunny" || rainStatus == "Sunny" || rainStatus == "Cloudy" || rainStatus == "Mostly Cloudy") {
 
                 document.getElementById("rainAnimation").className = "weather rain";
-                // $(".weather rain").css("background-color", "#ffffff");
-                // $(".weather rain").css("opacity", "0.3");
 
             }
 
         });
+
+    //get nearest place through lat and long
+    // $.get('http://api.geonames.org/findNearbyJSON?lat=' + lat + '&lng=' + long + '&username=ivnl',
+    //     function(response) {
+    //         console.log(response);
+    //         var div = document.getElementById('left');
+    //         div.innerHTML = div.innerHTML + response.geonames[0].summary + "<br/><br/>";
+
+    //     });
 
     //get nearby places from wikipedia geonames api based on lat and long
     $.get('http://api.geonames.org/findNearbyWikipediaJSON?lat=' + lat + '&lng=' + long + '&radius=20&username=ivnl',
@@ -159,6 +220,7 @@ function seekInfo(state, town, longlat) {
             div.innerHTML = div.innerHTML + response.geonames[0].summary + "<br/><br/>";
 
         });
+
 }
 
 google.maps.event.addDomListener(window, "load", initialize);
