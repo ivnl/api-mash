@@ -1,20 +1,46 @@
 html {
     margin-top: -20px;
     font-family: 'Open Sans', sans-serif;
-    background: url(../images/rocks.jpg) no-repeat center center fixed;
+    /*    background: url(../images/rocks.jpg) no-repeat center center fixed;
+*/
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
 }
 
+
+/*after is a pseudo element, used here to make background image more transparent as a demo*/
+
+html::after {
+    content: "";
+    background: url(../images/rocks.jpg) no-repeat center center fixed;
+    opacity: 0.8;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1;
+}
+
 body {
     text-shadow: 2px 2px 8px black;
-    background-color: rgba(255, 255, 255, .1);
     color: white;
     height: 100%;
     margin: 0;
     padding: 0;
+}
+
+#rainAnimation {
+    height: 100%;
+    content: "";
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1;
 }
 
 header {
@@ -27,6 +53,9 @@ hr {
     border-width: 1px;
 }
 
+
+/*used for font-awesome button icons*/
+
 form button {
     text-shadow: 2px 2px 8px black;
     background-color: transparent;
@@ -35,29 +64,12 @@ form button {
     color: white;
 }
 
-
-/*button {
-    height: 40px;
-    width: 62px;
-    margin-bottom: 5px;
-    background-color: #4CAF50;
-    border: none;
-    color: white;
-
-    font-size: 16px;
-}*/
-
 #address {
+    text-align: center;
     width: 35%;
     height: 32px;
     font-size: 22px;
     font-weight: 100;
-}
-
-#right {
-    float: left;
-    width: 20%;
-    height: 100%;
 }
 
 #search {
@@ -79,6 +91,12 @@ form button {
     padding-top: 40px;
     padding-bottom: 40px;
     margin-bottom: 60px;
+}
+
+#right {
+    float: left;
+    width: 20%;
+    height: 100%;
 }
 
 #left {
@@ -128,5 +146,23 @@ form button {
     html,
     body {
         height: auto;
+    }
+}
+
+
+/*move elements when screen width is insufficient*/
+
+@media screen and (max-width: 700px) {
+    #left {
+        float: none;
+        width: 100%;
+    }
+    #right {
+        float: none;
+        width: 100%;
+    }
+    #inner-wrap {
+        width: 100%;
+        margin-bottom: 70px;
     }
 }

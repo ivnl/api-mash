@@ -6,6 +6,12 @@ var town;
 var lat;
 var lng;
 
+$.fn.redraw = function() {
+    $(this).each(function() {
+        var redraw = this.offsetHeight;
+    });
+};
+
 /*The tool tip windows that shows above the marker with the location information*/
 var infowindow = new google.maps.InfoWindow({
     size: new google.maps.Size(200, 200)
@@ -27,6 +33,8 @@ function initialize() {
             position: google.maps.ControlPosition.TOP_CENTER,
         },
         streetViewControl: false,
+        styles: [{ "featureType": "landscape.man_made", "elementType": "geometry", "stylers": [{ "color": "#f7f1df" }] }, { "featureType": "landscape.natural", "elementType": "geometry", "stylers": [{ "color": "#d0e3b4" }] }, { "featureType": "landscape.natural.terrain", "elementType": "geometry", "stylers": [{ "visibility": "off" }] }, { "featureType": "poi", "elementType": "labels", "stylers": [{ "visibility": "off" }] }, { "featureType": "poi.business", "elementType": "all", "stylers": [{ "visibility": "off" }] }, { "featureType": "poi.medical", "elementType": "geometry", "stylers": [{ "color": "#fbd3da" }] }, { "featureType": "poi.park", "elementType": "geometry", "stylers": [{ "color": "#bde6ab" }] }, { "featureType": "road", "elementType": "geometry.stroke", "stylers": [{ "visibility": "off" }] }, { "featureType": "road", "elementType": "labels", "stylers": [{ "visibility": "off" }] }, { "featureType": "road.highway", "elementType": "geometry.fill", "stylers": [{ "color": "#ffe15f" }] }, { "featureType": "road.highway", "elementType": "geometry.stroke", "stylers": [{ "color": "#efd151" }] }, { "featureType": "road.arterial", "elementType": "geometry.fill", "stylers": [{ "color": "#ffffff" }] }, { "featureType": "road.local", "elementType": "geometry.fill", "stylers": [{ "color": "black" }] }, { "featureType": "transit.station.airport", "elementType": "geometry.fill", "stylers": [{ "color": "#cfb2db" }] }, { "featureType": "water", "elementType": "geometry", "stylers": [{ "color": "#a2daf2" }] }]
+
     };
 
     map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
@@ -46,6 +54,8 @@ function initialize() {
             return false;
         }
     });
+
+
 
 }
 //prevent default behavior of submit or find alternative, change submit to listener
@@ -134,8 +144,8 @@ function seekInfo(state, town, longlat) {
             if (rainStatus == "Mostly Sunny" || rainStatus == "Sunny" || rainStatus == "Cloudy" || rainStatus == "Mostly Cloudy") {
 
                 document.getElementById("rainAnimation").className = "weather rain";
-                $(".weather rain").css("background-color", "#ffffff");
-                $(".weather rain").css("opacity", "0.3");
+                // $(".weather rain").css("background-color", "#ffffff");
+                // $(".weather rain").css("opacity", "0.3");
 
             }
 
