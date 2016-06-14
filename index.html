@@ -8,57 +8,51 @@
     <link rel="stylesheet" href="style/style.css">
     <link rel="stylesheet" href="style/font-awesome.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moqmar/weather.css/master/weather.min.css">
-    <script src="https://maps.googleapis.com/maps/api/js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js"></script>
     <script src="script/script.js"></script>
     <link rel="icon" type="image/png" href="">
 </head>
 
-<body>
-    <header>
-        <div id="nav">
-        </div>
-
-        <h1 style="font-size: 48px">API MAP</h1>
-    </header>
-
-
-    <div id="rainAnimation">
-
-
-        <main>
-            <form id="search">
-                <div>
-                    <input id="address" type="text" value="United States" required>
-                    <input type="button" value="Search" onclick="seekAddress()">
-                </div>
-            </form>
-
-            <div id="wrapper">
-
-                <div id="left">
-                    <h1 style="margin-top:-20px">INFO</h1>
-                    <hr>
-                </div>
-                <div id="inner-wrap">
-                    <div id="map_canvas">
-                    </div>
-                </div>
-                <div id="right">
-
-                    <h1 style="margin-top:-20px">WEATHER</h1>
-
-                    <!-- Time for multiple clouds to dance around -->
-                    <div id="x1"></div>
-                    <div id="x2"></div>
-                    <div id="x3"></div>
-                    <div id="x4"></div>
-                    <div id="x5"></div>                </div>
-            </div>
-        </main>
+<body onresize="resize()">
+    <div id="rainAnimation" class="night">
+        <div id="x1"></div>
+        <div id="x2"></div>
+        <div id="x3"></div>
+        <div id="x4"></div>
+        <div id="x5"></div>
     </div>
-  </div>
-  <a href="about.html" id="about">About</a>
+    <header>
+        <a href="about.html"><h1 style="font-size: 38px"><i class="fa fa-map-marker" aria-hidden="true"></i>
+API MAP</h1></a>
+    </header>
+    <main>
+        <form id="search">
+            <input id="address" type="text" value="USA" required>
+            <button type="button" onclick="seekAddress()">
+                <i class="fa fa-chevron-circle-right fa-lg"></i>
+            </button>
+        </form>
+        <div id="wrapper">
+            <div id="left">
+                <h1 style="margin-top:-20px"><i class="fa fa-info-circle" aria-hidden="true"></i>  INFO</h1>
+                <hr>
+                <div id="leftinner">
+                </div>
+            </div>
+            <div id="inner-wrap">
+                <div id="map_canvas">
+                </div>
+            </div>
+            <div id="right">
+                <h1 style="margin-top:-20px"><i class="fa fa-cloud" aria-hidden="true"></i>  WEATHER</h1>
+                <hr>
+                <div id="rightinner">
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </main>
     <footer>
         <div id="bottom">
             <div id="things">
@@ -66,3 +60,5 @@
         </div>
     </footer>
 </body>
+
+</html>
