@@ -9,36 +9,25 @@ var lng;
 /*The tool tip windows that shows above the marker with the location information*/
 var infowindow = new google.maps.InfoWindow();
 
-
 // function to swap the center map div and the left div when user resizes width under 720px
 function trySwap() {
     if (document.body.clientWidth <= 720) {
+        $('#left').insertAfter('#inner-wrap');
+        $('#left').css("width", "49%");
+        $('#right').css("width", "49%");
+        $('#left').css("margin-top", "120px");
+        $('#right').css("margin-top", "120px");
 
-        //         #inner-wrap {
-        //     float: none;
-        //     width: 100%;
-        //     height: 50%;
-        // }
-        // #map_canvas {
-        //     float:none;
-        //     height: 100%;
-        //     width: 100%;
-        //     padding-top: 0;
-        //     margin-top: 0;
-        // }
         $('#inner-wrap').css("float", "none");
         $('#inner-wrap').css("width", "100%");
         $('#inner-wrap').css("height", "100%");
 
-
-        $('#left').insertAfter('#inner-wrap');
-        $('#left').css("float", "none");
-        $('#right').css("float", "none");
-
     } else if (document.body.clientWidth > 720) {
         $('#left').insertBefore('#inner-wrap');
-        $('#left').css("float", "left");
-        $('#right').css("float", "left");
+        $('#left').css("width", "");
+        $('#right').css("width", "");
+        $('#left').css("margin-top", "");
+        $('#right').css("margin-top", "");
 
         $('#inner-wrap').css("float", "");
         $('#inner-wrap').css("width", "");
