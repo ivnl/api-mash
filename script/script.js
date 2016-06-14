@@ -195,11 +195,22 @@ function seekInfo(state, town, longlat) {
 
             var rainStatus = data.query.results.channel.item.condition.text;
             console.log("Rain status: " + rainStatus);
-            if (rainStatus == "Mostly Sunny" || rainStatus == "Sunny" || rainStatus == "Cloudy" || rainStatus == "Mostly Cloudy") {
+            if (rainStatus == "Cloudy" || rainStatus == "Mostly Cloudy" || rainStatus == "Partly Cloudy") {
+
+              //  document.getElementById("rainAnimation").className = "weather rain";
+              //  $(".weather rain").css("background-color", "rgba(255,255,255,0.1)");
+                document.getElementById("x1").className = "cloud x1";
+                document.getElementById("x2").className = "cloud x2";
+                document.getElementById("x3").className = "cloud x3";
+                document.getElementById("x4").className = "cloud x4";
+                document.getElementById("x5").className = "cloud x5";
 
                 document.getElementById("rainAnimation").className = "weather rain";
 
             }
+          if(rainStatus == "Mostly Sunny" || rainStatus == "Sunny"){
+            document.getElementById("rainAnimation").className = "noRain";
+          }
 
         });
 
