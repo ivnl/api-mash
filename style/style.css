@@ -259,3 +259,9 @@ hr {
     0% {margin-left: 1000px;}
     100% {margin-left: -1000px;}
 }
+
+#about{
+color: white;
+font-size: 30px;
+text-decoration: none;
+}
