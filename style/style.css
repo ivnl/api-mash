@@ -18,13 +18,10 @@ body {
 }
 
 
-/*after is a pseudo element, used here to make background image more transparent as a demo*/
-
 
 /*make background fade darker when night time location detected
 */
-
-
+/*after is a pseudo element, to make background image more transparent as a demo*/
 /*html::after {
     content: "";
     background-color: rgba(0, 0, 0, .7);
@@ -37,7 +34,6 @@ body {
     position: absolute;
     z-index: -1;
 }*/
-
 
 /*rain animation in the background with NEGATIVE z-index based on html::after example*/
 
@@ -152,9 +148,6 @@ form button {
 }
 
 #bottom {}
-
-
-/*what is this?*/
 
 @media print {
     html,

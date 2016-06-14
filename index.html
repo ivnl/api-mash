@@ -14,10 +14,11 @@
     <link rel="icon" type="image/png" href="">
 </head>
 
-<body onresize="trySwap()">
-    <div id="rainAnimation"></div>
+<body onresize="resize()">
+    <div id="rainAnimation" class="night"></div>
     <header>
-        <a href="about.html"><h1 style="font-size: 48px">API MAP</h1></a>
+        <a href="about.html"><h1 style="font-size: 38px"><i class="fa fa-map-marker" aria-hidden="true"></i>
+API MAP</h1></a>
     </header>
     <main>
         <form id="search">
@@ -30,18 +31,20 @@
             <div id="left">
                 <h1 style="margin-top:-20px"><i class="fa fa-info-circle" aria-hidden="true"></i>  INFO</h1>
                 <hr>
-                <p>thing one</p>
+                <div id="leftinner">
+                </div>
             </div>
             <div id="inner-wrap">
                 <div id="map_canvas">
                 </div>
             </div>
             <div id="right">
-                <span>
                 <h1 style="margin-top:-20px"><i class="fa fa-cloud" aria-hidden="true"></i>  WEATHER</h1>
                 <hr>
-                <p>thing one</p>
+                <div id="rightinner">
+                    <span>
                 </span>
+                </div>
             </div>
         </div>
     </main>

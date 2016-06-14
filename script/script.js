@@ -10,7 +10,7 @@ var lng;
 var infowindow = new google.maps.InfoWindow();
 
 // function to swap the center map div and the left div when user resizes width under 720px
-function trySwap() {
+function resize() {
     if (document.body.clientWidth <= 720) {
         $('#left').insertAfter('#inner-wrap');
         $('#left').css("width", "49%");
@@ -19,8 +19,10 @@ function trySwap() {
         $('#right').css("margin-top", "120px");
 
         $('#inner-wrap').css("float", "none");
+        $('#inner-wrap').css("text-align", "center");
+
         $('#inner-wrap').css("width", "100%");
-        $('#inner-wrap').css("height", "100%");
+        $('#inner-wrap').css("height", "81%");
 
     } else if (document.body.clientWidth > 720) {
         $('#left').insertBefore('#inner-wrap');
@@ -33,6 +35,12 @@ function trySwap() {
         $('#inner-wrap').css("width", "");
         $('#inner-wrap').css("height", "");
     }
+}
+
+function daynight() {
+
+
+
 }
 
 /*initialize function initializes the map and sets the location to United States*/
@@ -178,9 +186,12 @@ function seekInfo(state, town, longlat) {
         // WHERE text="{$seedLat}, {$seedLong}" 
         function(data) {
             console.log(data);
-            var div = document.getElementById('right');
-            div.innerHTML = div.innerHTML + "The temp in " + town + " is: " + data.query.results.channel.item.condition.temp + " " +
-                data.query.results.channel.units.temperature + " the time is: " + data.query.results.channel.item.pubDate + "<br/>";
+            var div = document.getElementById('rightinner');
+
+            div.innerHTML = "The temp in " + town + " is currently: " + data.query.results.channel.item.condition.temp + " " +
+                data.query.results.channel.units.temperature + "<br><br> The date/time is: <br>" + data.query.results.channel.item.pubDate + "<br><br>" + "Current conditions: " + data.query.results.channel.item.condition.text + "<br><br>" +
+                "Humidity: " + data.query.results.channel.atmosphere.humidity + "% <br><br>" +
+                "Wind: " + data.query.results.channel.wind.speed + " mph";
 
             var rainStatus = data.query.results.channel.item.condition.text;
             console.log("Rain status: " + rainStatus);
@@ -192,22 +203,15 @@ function seekInfo(state, town, longlat) {
 
         });
 
-    //get nearest place through lat and long
-    // $.get('http://api.geonames.org/findNearbyJSON?lat=' + lat + '&lng=' + long + '&username=ivnl',
-    //     function(response) {
-    //         console.log(response);
-    //         var div = document.getElementById('left');
-    //         div.innerHTML = div.innerHTML + response.geonames[0].summary + "<br/><br/>";
-
-    //     });
-
     //get nearby places from wikipedia geonames api based on lat and long
     $.get('http://api.geonames.org/findNearbyWikipediaJSON?lat=' + lat + '&lng=' + long + '&radius=20&username=ivnl',
         function(response) {
             console.log(response);
-            var div = document.getElementById('left');
-            div.innerHTML = div.innerHTML + response.geonames[0].summary + "<br/><br/>";
-
+            var div = document.getElementById('leftinner');
+            div.innerHTML = "";
+            for (i = 0; i < response.geonames.length; i++) {
+                div.innerHTML = div.innerHTML + response.geonames[i].summary + "<br/><br/>";
+            }
         });
 
 }
