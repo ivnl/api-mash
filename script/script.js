@@ -227,4 +227,34 @@ function seekInfo(state, town, longlat) {
 
 }
 
+//image search using bing
+function imageSearch() {
+$(function() {
+        var params = {            // Request parameters
+            "q": "cats",
+            "count": "10",
+            "offset": "0",
+            "mkt": "en-us",
+            "safeSearch": "Moderate",
+        };
+      
+        $.ajax({
+            url: "https://bingapis.azure-api.net/api/v5/images/search?" + $.param(params),
+            beforeSend: function(xhrObj){
+                // Request headers
+                xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key","{b96ce5f4c942427ba353c19b6610c3e5}");
+            },
+            type: "GET",
+            // Request body
+            data: "{body}",
+        })
+        .done(function(data) {
+            alert("success");
+        })
+        .fail(function() {
+            alert("error");
+        });
+    });
+}
+
 google.maps.event.addDomListener(window, "load", initialize);

@@ -54,7 +54,7 @@ hr {
 
 /*used for font-awesome button icons*/
 
-form button {
+button {
     text-shadow: 2px 2px 8px black;
     background-color: transparent;
     border: none;
