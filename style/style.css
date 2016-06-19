@@ -20,7 +20,7 @@ body {
 /*rain animation in the background with NEGATIVE z-index based on html::after example*/
 #rainAnimation {
     opacity: .7;
-    height: 120%;
+    height: 110%;
     content: "";
     top: 0;
     left: 0;
@@ -31,7 +31,7 @@ body {
 }
 
 header {
-    width: 200px;
+    width: 400px;
     text-align: center;
     margin: 0 auto;
     padding: 0 auto;

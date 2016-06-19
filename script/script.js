@@ -37,12 +37,6 @@ function resize() {
     }
 }
 
-function daynight() {
-
-
-
-}
-
 /*initialize function initializes the map and sets the location to United States*/
 function initialize() {
     geocoder = new google.maps.Geocoder();
